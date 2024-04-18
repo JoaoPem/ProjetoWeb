@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PcStore</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>
+  <header>
+    <div class="left-menu">
+      <ul class="horizontal-list" >
+        <li>
+          <%= image_tag "folha.png", height: "40", width: "40", style: "margin-right: 10px;" %>
+          <a href="#", style="align-items: center;">EcoTech</a>
+        </li>
+        <li>
+          <a href="#">Service</a>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <a href="#">FAQ</a>
+        </li>
+      </ul>
+    </div>
+    <div class="right-menu">
+      <ul class="horizontal-list" >
+        <li>
+          <button class="btn-plain">
+            <%= image_tag "carrinho3.png", height: "50", width: "50"%>
+          </button>
+        </li>
+        <li class="dropdown">
+          <button   class="btn-plain">
+            <%= image_tag "profile.png", height: "50", width: "50" %>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Editar</a>
+            <a href="#">Sair</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <%= yield %>
+</body>
+</html>
