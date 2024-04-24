@@ -15,6 +15,35 @@
 //= require turbolinks
 //= require_tree .
 
+
+// import $ from 'jquery';
+// window.jQuery = $;
+// window.$ = $;
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   // Handle click on "Next" buttons
+//   const nextButtons = document.querySelectorAll('.next-button');
+//   nextButtons.forEach((button, index) => {
+//     button.addEventListener('click', function() {
+//       const currentStep = document.querySelectorAll('.step')[index];
+//       const nextStep = document.querySelectorAll('.step')[index + 1];
+      
+//       if (currentStep && nextStep) {
+//         currentStep.style.display = 'none'; // Hide current step
+//         nextStep.style.display = 'block'; // Show next step
+//       }
+//     });
+//   });
+// });
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const firstStep = document.querySelector('.step');
+//   if (firstStep) {
+//     firstStep.style.display = 'block'; // Show the first step initially
+//   }
+// });
+
+
 $(document).ready(function(){
     
   var current_fs, next_fs, previous_fs; //fieldsets

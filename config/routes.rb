@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'inicio', to: 'site/welcome#index'
-
   root to: 'site/welcome#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get 'cart', to: 'cart#index', as: 'cart'
+  post 'add_item_to_cart', to: 'cart#add_item_to_cart', as: 'add_item_to_cart'
+  post 'finalize_order', to: 'cart#finalize_order', as: 'finalize_order'
 end

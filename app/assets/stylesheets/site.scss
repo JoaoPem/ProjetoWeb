@@ -2,6 +2,7 @@
 *= require bootstrap/dist/css/bootstrap
 */
 
+
 * {
   margin: 0;
   padding: 0;
@@ -166,8 +167,14 @@ text-align: left;
 
 /*Icons in the ProgressBar*/
 #progressbar #account:before {
-  font-family: FontAwesome;
-  content: "\f13e";
+  content: ""; /* Needs to be empty but not removed */
+  display: inline-block; /* Allows us to set a width and height */
+  width: 60px; /* Adjust size as needed */
+  height: 60px; /* Adjust size as needed */
+  background-image: url('/assets/processador.jpg'); /* Path to the image in the assets pipeline */
+  background-size: 30px; /* Smaller than the container */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-size: cover; /* Covers the entire area of the pseudo-element */
 }
 
 #progressbar #personal:before {

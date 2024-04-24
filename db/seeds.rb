@@ -6,10 +6,10 @@ end
 category_map = Category.all.index_by(&:name)
 
 processor_data = [
-  { name: "Core i5", specifications: "{ \"marca\": \"Intel\" }", category: category_map["Processador"], image_url: "https://laptopsreviewer.com/wp-content/uploads/2021/06/intel-core-i5-11400f-desktop-processor-6-cores-up-to-44-ghz-lga1200-intel-2048x2048.jpg"  },
-  { name: "Core i7", specifications: "{ \"marca\": \"Intel\" }", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/R.a1f0b340a991936d9b477cd0065d2458?rik=IpNUiYhs1GuRWw&pid=ImgRaw&r=0"  },
-  { name: "Ryzen 5", specifications: "{ \"marca\": \"AMD\" }", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/OIP.iWwVATfqhxqjqk-fD5CZNAHaFj?rs=1&pid=ImgDetMain" },
-  { name: "Ryzen 7", specifications: "{ \"marca\": \"AMD\" }", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/OIP.V0hGVdzHzL3tXO-8l9ouigHaED?rs=1&pid=ImgDetMain" }
+  { name: "Core i5", specifications: "Intel", category: category_map["Processador"], image_url: "https://laptopsreviewer.com/wp-content/uploads/2021/06/intel-core-i5-11400f-desktop-processor-6-cores-up-to-44-ghz-lga1200-intel-2048x2048.jpg"  },
+  { name: "Core i7", specifications: "Intel", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/R.a1f0b340a991936d9b477cd0065d2458?rik=IpNUiYhs1GuRWw&pid=ImgRaw&r=0"  },
+  { name: "Ryzen 5", specifications: "AMD", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/OIP.iWwVATfqhxqjqk-fD5CZNAHaFj?rs=1&pid=ImgDetMain" },
+  { name: "Ryzen 7", specifications: "AMD", category: category_map["Processador"], image_url: "https://th.bing.com/th/id/OIP.V0hGVdzHzL3tXO-8l9ouigHaED?rs=1&pid=ImgDetMain" }
 ]
 
 motherboard_data = [

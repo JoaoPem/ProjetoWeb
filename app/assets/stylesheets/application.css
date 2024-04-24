@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ 
+.step {
+  display: none; /* Hide all steps initially */
+}
+
+.step.active {
+  display: block; /* Show active step */
+}

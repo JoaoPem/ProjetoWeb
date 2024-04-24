@@ -1,13 +1,13 @@
 'pt-BR':
   activerecord:
-  models:
-    user:
-      one: Usuário
-      others: Usuários
-  attributes:
-    user:
-      id: Código
-      email: Email
-      created_at: Criado em
-      updated_at: Atualizado em
-      password: Senha
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+    attributes:
+      user:
+        id: Código
+        email: Email
+        created_at: Criado em
+        updated_at: Atualizado em
+        password: Senha

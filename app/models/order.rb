@@ -1,5 +1,7 @@
 class Order < ApplicationRecord
-  
+
+  has_many :order_items
+
   belongs_to :user
   belongs_to :processor, class_name: 'Product', optional: true
   belongs_to :motherboard, class_name: 'Product', optional: true
