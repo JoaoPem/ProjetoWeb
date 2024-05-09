@@ -3,6 +3,9 @@ class Site::WelcomeController < ApplicationController
 
   def index
     @processors = Product.where(category_id: 1)
+    @motherboards = Product.where(category_id: 2)
+    @ram_cards = Product.where(category_id: 3)
+    @video_cards = Product.where(category_id: 4)
   end
 
   private

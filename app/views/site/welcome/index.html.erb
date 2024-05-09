@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row justify-content-center", style="background-color: white">
+      <div class="row justify-content-center" style="background-color: white">
         <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
           <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
           <% if flash[:notice] %>
@@ -28,130 +28,148 @@
             <form id="msform">
               <ul id="progressbar">
                 <li class="active" id="step1_progress">
-                  <%= image_tag "processador.jpg", alt: "Processor", style: "height: 50px; width: 50px; margin: 0 auto; display: block;"%>
+                  <%= image_tag "processador.jpg", alt: "Processor", style: "height: 50px; width: 50px; margin: 0 auto; display: block;" %>
                   <b>Processador</b>
                 </li>
                 <li id="step2_progress">
                   <%= image_tag "mother.jpg", alt: "Mother Board", style: "height: 50px; width: 50px; margin: 0 auto; display: block;" %>
                   <b>Placa Mãe</b>
-                  </li>
+                </li>
                 <li id="step3_progress">
                   <%= image_tag "ram.png", alt: "Ram", style: "height: 50px; width: 50px; margin: 0 auto; display: block;" %>
                   <b>Memória RAM</b>
-                  </li>
+                </li>
                 <li id="step4_progress">
                   <%= image_tag "video.png", alt: "Video", style: "height: 50px; width: 50px; margin: 0 auto; display: block;" %>
                   <b>Placa de Vídeo</b>
-                  </li>
+                </li>
               </ul>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <br>
 
-              <fieldset id="step1">
-                <div class="form-card">
-                  <div class="row justify-content-center">
-                    <div class="col-10">
-                      <div class="row">
-                        <div class="col-12 text-center">
-                          <h2 class="fs-title">Escolha seu Processador</h2>
-                        </div>
-                        <div class="col-12 text-center">
-                          <h2 class="steps">Step 1 - 4</h2>
-                        </div>
+              <fieldset id="step1" class="form-card">
+                <div class="row justify-content-center">
+                  <div class="col-10">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <h2 class="fs-title">Escolha seu Processador</h2>
+                        <h2 class="steps">Step 1 - 4</h2>
                       </div>
-                      <div class="row justify-content-center">
-                        <% @processors.each_with_index do |processor, index| %>
-                          <div class="col-md-6 col-lg-4">
-                            <div class="card" style="width: 18rem;">
-                              <img src="<%= processor.image_url %>" class="card-img-top" alt="<%= processor.name %>" style="height: 100px; width: 100px;">
-                              <div class="card-body">
-                                <h5 class="card-title"><%= processor.name %></h5>
-                                <p class="card-text"><%= processor.specifications %></p>
-                                <button class="add_button" type="button" >
-                                  <%= link_to "Adicionar",  add_item_to_cart_path(product_id: processor.id), method: :post, class: "btn btn-primary" %>
-                                </button> 
-                              </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <% @processors.each_with_index do |processor, index| %>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                          <div class="card text-center" style="width: 10rem;">
+                            <img src="<%= processor.image_url %>" class="card-img-top mx-auto" alt="<%= processor.name %>" style="height: 100px; width: 100px;">
+                            <div class="card-body">
+                              <h5 class="card-title"><%= processor.name %></h5>
+                              <p class="card-text"><%= processor.specifications %></p>
+                              <%= link_to "Adicionar", add_item_to_cart_path(product_id: processor.id), method: :post, class: "btn btn-primary add-to-cart", data: {next_step: "step2", current_step: "step1"} %>
                             </div>
                           </div>
-                          <% if index % 2 == 1 %>
-                            </div><div class="row justify-content-center">
-                          <% end %>
+                        </div>
+                        <% if index % 2 == 1 %>
+                          </div><div class="row justify-content-center">
                         <% end %>
-                      </div>
+                      <% end %>
                     </div>
                   </div>
                 </div>
-                <input type="button" name="next" class="next action-button" value="Next" onclick="showNextStep('step2', 'step1')"/>
-
               </fieldset>
 
-              <fieldset id = "step2">
-                  <div class="form-card">
-                      <div class="row">
-                      <div class="col-7">
-                          <h2 class="fs-title">Escolha sua Placa Mãe</h2>
-                        </div>
-                        <div class="col-5">
-                          <h2 class="steps">Step 2 - 4</h2>
-                        </div>
-                      </div>
-                      <label class="fieldlabels">First Name: *</label>
-                      <input type="text" name="fname" placeholder="First Name"/>
-                      <label class="fieldlabels">Last Name: *</label>
-                      <input type="text" name="lname" placeholder="Last Name"/>
-                      <label class="fieldlabels">Contact No.: *</label>
-                      <input type="text" name="phno" placeholder="Contact No."/>
-                      <label class="fieldlabels">Alternate Contact No.: *</label>
-                      <input type="text" name="phno_2" placeholder="Alternate Contact No."/>
-                  </div>
-                  <input type="button" name="next" class="next action-button" value="Next"/>
-                  <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              </fieldset>
-              <fieldset>
-                  <div class="form-card">
-                      <div class="row">
-                      <div class="col-7">
-                          <h2 class="fs-title">Escolha a Memória RAM</h2>
-                        </div>
-                        <div class="col-5">
-                          <h2 class="steps">Step 3 - 4</h2>
-                        </div>
-                      </div>
-                      <label class="fieldlabels">Upload Your Photo:</label>
-                      <input type="file" name="pic" accept="image/*">
-                      <label class="fieldlabels">Upload Signature Photo:</label>
-                      <input type="file" name="pic" accept="image/*">
-                  </div>
-                  <input type="button" name="next" class="next action-button" value="Submit"/>
-                  <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              </fieldset>
-              <fieldset>
-                  <div class="form-card">
+              <fieldset id="step2" class="form-card" style="display:none;">
+                <div class="row justify-content-center">
+                  <div class="col-10">
                     <div class="row">
-                      <div class="col-7">
-                          <h2 class="fs-title">Escolha a Placa de Vídeo</h2>
-                        </div>
-                        <div class="col-5">
-                          <h2 class="steps">Step 4 - 4</h2>
-                        </div>
+                      <div class="col-12 text-center">
+                        <h2 class="fs-title">Escolha sua Placa Mãe</h2>
+                        <h2 class="steps">Step 2 - 4</h2>
                       </div>
-                      <br><br>
-                      <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
-                      <br>
-                      <div class="row justify-content-center">
-                          <div class="col-3">
-                              <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
+                    </div>
+                    <div class="row justify-content-center">
+                      <% @motherboards.each_with_index do |motherboard, index| %>
+                        <div class="col-md-6 mb-4">
+                          <div class="card text-center" style="width: 18rem; margin: 15px;">
+                            <img src="<%= motherboard.image_url %>" class="card-img-top mx-auto" alt="<%= motherboard.name %>" style="height: 100px; width: 100px;">
+                            <div class="card-body">
+                              <h5 class="card-title"><%= motherboard.name %></h5>
+                              <p class="card-text"><%= motherboard.specifications %></p>
+                              <%= link_to "Adicionar", add_item_to_cart_path(product_id: motherboard.id), method: :post, class: "btn btn-primary"%>
+                            </div>
                           </div>
-                      </div>
-                      <br><br>
-                      <div class="row justify-content-center">
-                          <div class="col-7 text-center">
-                              <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                          </div>
-                      </div>
+                        </div>
+                        <% if (index + 1) % 2 == 0 && (index + 1) != @motherboards.count %>
+                          </div><div class="row justify-content-center">
+                        <% end %>
+                      <% end %>
+                    </div>
                   </div>
+                </div>
+                <input type="button" name="next" class="next action-button" value="Next" onclick="showNextStep('step3', 'step2')"/>
+              </fieldset>
+
+              <fieldset id = "step3" class="form-card" style="display:none;">
+                <div class="row justify-content-center">
+                  <div class="col-10">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <h2 class="fs-title">Escolha sua Memória RAM</h2>
+                        <h2 class="steps">Step 3 - 4</h2>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <% @ram_cards.each_with_index do |ram_card, index| %>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                          <div class="card text-center" style="width: 10rem;">
+                            <img src="<%= ram_card.image_url %>"  class="card-img-top mx-auto" alt="<%= ram_card.name %>" style="height: 100px; width: 100px;">
+                            <div class="card-body">
+                              <h5 class="card-title"><%= ram_card.name %></h5>
+                              <p class="card-text"><%= ram_card.specifications %></p>
+                              <%= link_to "Adicionar", add_item_to_cart_path(product_id: ram_card.id), method: :post, class: "btn btn-primary"%>
+                            </div>
+                          </div>
+                        </div>
+                        <% if index % 2 == 1 %>
+                          </div><div class="row justify-content-center">
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <input type="button" name="next" class="next action-button" value="Next" onclick="showNextStep('step4', 'step3')"/>
+              </fieldset>
+
+              <fieldset id="step4" class="form-card" style="display:none;">
+                <div class="row justify-content-center">
+                  <div class="col-10">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <h2 class="fs-title">Escolha sua Placa de Vídeo</h2>
+                        <h2 class="steps">Step 4 - 4</h2>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <% @video_cards.each_with_index do |video_card, index| %>
+                        <div class="col-md-6 mb-4">
+                          <div class="card text-center" style="width: 18rem; margin: 15px;">
+                            <img src="<%= video_card.image_url %>" class="card-img-top mx-auto" alt="<%= video_card.name %>" style="height: 100px; width: 100px;">
+                            <div class="card-body">
+                              <h5 class="card-title"><%= video_card.name %></h5>
+                              <p class="card-text"><%= video_card.specifications %></p>
+                              <%= link_to "Adicionar", add_item_to_cart_path(product_id: video_card.id), method: :post, class: "btn btn-primary" %>
+                            </div>
+                          </div>
+                        </div>
+                        <% if (index + 1) % 2 == 0 && (index + 1) != @video_cards.count %>
+                          </div><div class="row justify-content-center">
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <input type="button" name="next" class="next action-button" value="Finalizar Pedido" onclick="showNextStep('step3', 'step2')"/>
               </fieldset>
             </form>
           </div>

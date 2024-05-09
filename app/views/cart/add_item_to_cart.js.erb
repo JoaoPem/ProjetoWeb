@@ -1,0 +1,6 @@
+$('#<%= @current_step %>').hide();
+$('#<%= @next_step %>').show();
+
+<% if @next_step %>
+  showNextStep("<%= @next_step %>", "<%= @current_step %>");
+<% end %>
