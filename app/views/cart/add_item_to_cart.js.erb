@@ -1,6 +1,11 @@
-$('#<%= @current_step %>').hide();
-$('#<%= @next_step %>').show();
+<% if @next_step && @current_step %>
 
-<% if @next_step %>
-  showNextStep("<%= @next_step %>", "<%= @current_step %>");
+  $('#<%= @current_step %>').hide();
+  $('#<%= @next_step %>').show();
+
+  updateProgressBar('<%= @next_step %>');
+
+<% else %>
+
+  alert('Produto adicionado ao carrinho com sucesso!');
 <% end %>

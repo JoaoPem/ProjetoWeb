@@ -5,19 +5,22 @@
 #= require bootstrap/dist/js/bootstrap
 
 showNextStep = (nextStepId, currentStepId) ->
-  currentStep = document.getElementById(currentStepId)
-  nextStep = document.getElementById(nextStepId)
+  $("#"+currentStepId).hide()
+  $("#"+nextStepId).show()
 
-  if currentStep
-    currentStep.style.display = 'none'
-    currentStep.classList.remove('active')
-  
-  if nextStep
-    nextStep.style.display = 'block'
-    nextStep.classList.add('active')
-
-  # Update the progress bar
+  # Atualizar a barra de progresso
   updateProgressBar(nextStepId)
+
+updateProgressBar = (nextStepId) ->
+  activeIndex = $("[id$='_progress']").index($("#"+nextStepId+"_progress"))
+  $(".progress-bar").css("width", ((activeIndex + 1) / $("[id$='_progress']").length * 100) + "%")
+
+# Executando após o sucesso da adição ao carrinho
+$(document).on 'ajax:success', '.add-to-cart', (event, data, status, xhr) ->
+  nextStepId = $(this).data("next-step")
+  currentStepId = $(this).data("current-step")
+  showNextStep(nextStepId, currentStepId)
+
 
 # Update progress bar based on the current step
 updateProgressBar = (nextStepId) ->
@@ -41,18 +44,19 @@ handleAddToCart = (productId, nextStepId, currentStepId) ->
   csrfToken = $('meta[name="csrf-token"]').attr('content')
   
   $.ajax
-    type: 'POST'
-    url: "/add_item_to_cart"
-    data: 
-      authenticity_token: csrfToken
-      product_id: productId
-      current_step: currentStepId
-      next_step: nextStepId
-    success: (data) ->
-      console.log('Item added: ', data)
-      showNextStep(nextStepId, currentStepId)
-    error: (xhr, status, error) ->
-      console.error('Failed to add item: ', status, error)
+  type: 'POST'
+  url: "/add_item_to_cart"
+  data: 
+    authenticity_token: $('meta[name="csrf-token"]').attr('content')
+    product_id: productId
+    current_step: currentStepId
+    next_step: nextStepId
+  dataType: 'script'  # Garanta que o formato esperado seja script
+  success: (data) ->
+    console.log 'Item added: ', data
+  error: (xhr, status, error) ->
+    console.error 'Failed to add item: ', status, error
+
 
 # Bind click events on document ready
 $(document).on 'turbolinks:load', ->

@@ -20,7 +20,7 @@ class CartController < ApplicationController
     @next_step = params[:next_step]
   
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Produto adicionado ao carrinho com sucesso!' }
+      #format.html { redirect_to root_path, notice: 'Produto adicionado ao carrinho com sucesso!' }
       #format.json { render notify: 'Produto adicionado ao carrinho com sucesso!'}
       format.js
     end
