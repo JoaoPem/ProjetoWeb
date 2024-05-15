@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   root to: 'site/welcome#index'
 
   get 'cart', to: 'cart#index', as: 'cart'
+  #get 'cart', to: 'carts#show'
+
   post 'add_item_to_cart', to: 'cart#add_item_to_cart', as: 'add_item_to_cart'
   post 'finalize_order', to: 'cart#finalize_order', as: 'finalize_order'
 end
