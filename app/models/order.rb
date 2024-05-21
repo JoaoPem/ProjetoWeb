@@ -1,5 +1,4 @@
 class Order < ApplicationRecord
-
   has_many :order_items
 
   belongs_to :user
@@ -21,26 +20,22 @@ class Order < ApplicationRecord
   def validate_processor_compatibility
     return if processor.nil? || motherboard.nil?
 
-    processor_brand = JSON.parse(processor.specifications)['marca']
-    supported_processors = JSON.parse(motherboard.specifications)['processadores_suportados']
+    processor_brand = extract_specification(processor.specifications, 'Marca')
+    supported_processors = extract_specification(motherboard.specifications, 'Processadores suportados').split(', ')
 
-    if supported_processors.is_a?(Array)
-      unless supported_processors.include?(processor_brand)
-        errors.add(:processor, "não é compatível com a placa-mãe selecionada")
-      end
-    else
-      errors.add(:motherboard, "não tem processadores suportados definidos corretamente")
+    unless supported_processors.include?(processor_brand)
+      errors.add(:processor, "não é compatível com a placa-mãe selecionada")
     end
   end
 
   def validate_ram_selection
     return if ram.nil? || motherboard.nil?
 
-    ram_slots = JSON.parse(motherboard.specifications)['slots_memoria']
-    max_ram_supported = JSON.parse(motherboard.specifications)['memoria_suportada']
-    selected_ram_size = JSON.parse(ram.specifications)['tamanho']
+    ram_slots = extract_specification(motherboard.specifications, 'Slots de memória').to_i
+    max_ram_supported = extract_specification(motherboard.specifications, 'Memória suportada').to_i
+    selected_ram_size = extract_specification(ram.specifications, 'Tamanho').to_i
 
-    if selected_ram_size.to_i > max_ram_supported.to_i
+    if selected_ram_size > max_ram_supported
       errors.add(:ram, "selecionada excede o total suportado pela placa-mãe")
     end
   end
@@ -48,9 +43,15 @@ class Order < ApplicationRecord
   def validate_video_card_requirement
     return if motherboard.nil?
 
-    video_integrado = JSON.parse(motherboard.specifications)['video_integrado']
-    if video_integrado == false && video_card.nil?
+    video_integrado = extract_specification(motherboard.specifications, 'Vídeo integrado') == 'Sim'
+    if !video_integrado && video_card.nil?
       errors.add(:video_card, "é necessária, pois a placa-mãe não possui vídeo integrado")
     end
+  end
+
+  # Helper method to extract a specification from a formatted string
+  def extract_specification(specifications, key)
+    specs = specifications.split(', ').map { |spec| spec.split(': ') }.to_h
+    specs[key]
   end
 end
